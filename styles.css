@@ -48,7 +48,7 @@ p {
     align-self: center;
 }
 
-button.add {
+#add {
     font-size: 32px;
     font-weight: 600;
     padding: 10px 30px;
