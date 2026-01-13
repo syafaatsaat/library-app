@@ -8,10 +8,73 @@
 
     <link rel="stylesheet" href="./styles.css">
     <script src="./script.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <div id="container">
+        <div id="header">
+            Your Library
+        </div>
     
+        <div id="main-content">
+            <div id="shelf">
+                <div class="book">
+                    <div class="book-cover">
+                        <img src="" alt="" id="cover">
+                    </div>
+                    <div class="book-info">
+                        <p class="title">
+                            Harry Potter and the Philosopher's Stone
+                        </p>
+                        <p class="author">
+                            J. K. Rowling
+                        </p>
+                        <div class="pages-section">
+                            <p id="pages">223</p>
+                            <p class="pages-word">pages</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="read">
+                                Read
+                            </button>
+                            <button class="remove">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="book">
+                    <div class="book-cover">
+                        <img src="" alt="" id="cover">
+                    </div>
+                    <div class="book-info">
+                        <p class="title">
+                            Percy Jackson and The Lightning Thief
+                        </p>
+                        <p class="author">
+                            Rick Riordan
+                        </p>
+                        <div class="pages-section">
+                            <p id="pages">377</p>
+                            <p class="pages-word">pages</p>
+                        </div>
+                        <div class="buttons">
+                            <button class="unread">
+                                Unread
+                            </button>
+                            <button class="remove">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
