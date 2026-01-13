@@ -1,6 +1,8 @@
 :root {
     --read-bg-color: rgb(26, 79, 32);
     --unread-bg-color: rgb(122, 17, 17);
+    --button-bg-color: rgb(90, 90, 90);
+    --new-button-bg-color: rgb(176, 192, 255);
 }
 
 body {
@@ -31,12 +33,30 @@ p {
 }
 
 #header {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#header > p {
+    margin: 0;
     font-weight: 600;
     font-size: 64px;
     font-family: "Arvo", serif;
     font-style: normal;
-    text-align: center;
     align-self: center;
+}
+
+button.add {
+    font-size: 32px;
+    font-weight: 600;
+    padding: 10px 30px;
+    height: max-content;
+    align-self: center;
+    border-radius: 10px;
+    border: 0;
+    background-color: var(--new-button-bg-color);
 }
 
 #main-content {
@@ -121,5 +141,5 @@ p {
 }
 
 .remove {
-    background-color: rgb(90, 90, 90);
+    background-color: var(--button-bg-color);
 }
