@@ -76,6 +76,33 @@
             </div>
         </div>
     </div>
+    <div id="new-book">
+        <dialog open>
+            <button>
+                <img src="./assets/images/close-thick.svg" alt="close-thick">
+            </button>
+            <p>New book</p>
+            <form method="dialog">
+                <div class="form-row">
+                    <label for="titleid">Title</label>
+                    <input type="text" id="titleid" name="title" required/>
+                </div>
+                <div class="form-row">
+                    <label for="authorid">Author</label>
+                    <input type="text" id="authorid" name="author" required/>
+                </div>
+                <div class="form-row">
+                    <label for="pagesid">Number of pages</label>
+                    <input type="number" id="pagesid" name="pages" required/>
+                </div>
+                <div class="form-row">
+                    <label for="readstatusid">Read already?</label>
+                    <input type="checkbox" id="readstatusid"/>
+                </div>
+                <button>Submit</button>
+            </form>
+        </dialog>
+    </div>
 </body>
 
 </html>

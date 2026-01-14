@@ -3,6 +3,7 @@
     --unread-bg-color: rgb(122, 17, 17);
     --button-bg-color: rgb(90, 90, 90);
     --new-button-bg-color: rgb(176, 192, 255);
+    --focus-input-color: rgb(0, 255, 0);
 }
 
 body {
@@ -142,4 +143,131 @@ p {
 
 .remove {
     background-color: var(--button-bg-color);
+}
+
+#new-book {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+}
+
+dialog {
+    width: 30%;
+    color: white;
+    background-color: rgb(34, 36, 48);
+    border-color: black;
+}
+
+dialog > p {
+    font-weight: bold;
+    font-size: 32px;
+    margin: 20px;
+    margin: 0;
+}
+
+dialog > button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    padding: 0;
+}
+
+dialog > button > img {
+    filter: brightness(0) invert(1);
+}
+
+dialog > button,
+dialog > button > img {
+    height: 40px;
+    width: 40px;
+}
+
+form {
+    padding: 20px 0;
+    font-size: 18px;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-row:not(:last-of-type) {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input {
+    font-size: 20px;
+    color:  white;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+input:focus {
+    outline-color: var(--focus-input-color);
+}
+
+.form-row:last-of-type {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    gap: 20px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    margin: 0;
+    font: inherit;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em white;
+
+    background-color: CanvasText;
+
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid var(--focus-input-color);
+    outline-offset: max(2px, 0.15em);
+}
+
+form > button {
+    font-size: 20px;
+    background-color: var(--read-bg-color);
+    color: white;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 10px;
 }

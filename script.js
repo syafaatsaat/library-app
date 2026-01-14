@@ -43,6 +43,7 @@ function createBookElements(newBook) {
     pagesP.textContent = newBook.pages;
     const pagesWordP = document.createElement("p");
     pagesWordP.classList.add("pages-word");
+    pagesWordP.textContent = "pages";
     pagesSectionDiv.appendChild(pagesP);
     pagesSectionDiv.appendChild(pagesWordP);
     const buttonsDiv = document.createElement("div");
