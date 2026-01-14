@@ -97,6 +97,25 @@ function createBookElements(newBook) {
     removeButton.addEventListener('click', () => {
         removeBook(newBook.id);
     });
+
+    readButton.addEventListener('click', () => {
+        newBook.toggleRead();
+
+        if (!newBook.readStatus) {
+            if (readButton.classList.contains("read")) {
+                readButton.classList.remove("read");
+            }
+            readButton.classList.add("unread");
+            readButton.textContent = "Unread";
+        }
+        else {
+            if (readButton.classList.contains("unread")) {
+                readButton.classList.remove("unread");
+            }
+            readButton.classList.add("read");
+            readButton.textContent = "Read";
+        }
+    })
 }
 
 function checkEntry() {
@@ -163,23 +182,23 @@ buttons.addEventListener('click', (event) => {
     }
 });
 
-addBookToLibrary(
-    "Harry Potter and the Philosopher's Stone",
-    "J. K. Rowling",
-    223,
-    false
-);
+// addBookToLibrary(
+//     "Harry Potter and the Philosopher's Stone",
+//     "J. K. Rowling",
+//     223,
+//     false
+// );
 
-addBookToLibrary(
-    "Percy Jackson and The Lightning Thief",
-    "Rick Riordan",
-    377,
-    true
-);
+// addBookToLibrary(
+//     "Percy Jackson and The Lightning Thief",
+//     "Rick Riordan",
+//     377,
+//     true
+// );
 
-addBookToLibrary(
-    "Heroes of Olympus: The Lost Hero",
-    "Rick Riordan",
-    557,
-    true
-);
+// addBookToLibrary(
+//     "Heroes of Olympus: The Lost Hero",
+//     "Rick Riordan",
+//     557,
+//     true
+// );
