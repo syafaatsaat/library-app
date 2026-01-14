@@ -50,14 +50,18 @@ p {
 }
 
 #add {
-    font-size: 32px;
-    font-weight: 600;
-    padding: 10px 30px;
-    height: max-content;
+    height: 80px;
+    width: 80px;
+    padding: 0;
     align-self: center;
-    border-radius: 10px;
-    border: 0;
-    background-color: var(--new-button-bg-color);
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+#add > img {
+    width: 40px;
+    height: 40px;
 }
 
 #main-content {
@@ -187,9 +191,10 @@ dialog > p {
     padding: 0;
 }
 
+#add > img,
 #close-entry > img {
     filter: brightness(0) invert(1);
-    
+    pointer-events: none;
 }
 
 #close-entry,
