@@ -23,7 +23,7 @@
     
         <div id="main-content">
             <div id="shelf">
-                <div class="book">
+                <!-- <div class="book">
                     <div class="book-cover">
                         <img src="" alt="" id="cover">
                     </div>
@@ -47,42 +47,17 @@
                             </button>
                         </div>
                     </div>
-                </div>
-                <div class="book">
-                    <div class="book-cover">
-                        <img src="" alt="" id="cover">
-                    </div>
-                    <div class="book-info">
-                        <p class="title">
-                            Percy Jackson and The Lightning Thief
-                        </p>
-                        <p class="author">
-                            Rick Riordan
-                        </p>
-                        <div class="pages-section">
-                            <p id="pages">377</p>
-                            <p class="pages-word">pages</p>
-                        </div>
-                        <div class="buttons">
-                            <button id="read-status" class="unread">
-                                Unread
-                            </button>
-                            <button class="remove">
-                                Remove
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
-    <div id="new-book">
-        <dialog open>
-            <button>
+    <div id="new-book" class="hide-entry">
+        <dialog>
+            <button id="close-entry">
                 <img src="./assets/images/close-thick.svg" alt="close-thick">
             </button>
             <p>New book</p>
-            <form method="dialog">
+            <form id="book-form" method="dialog">
                 <div class="form-row">
                     <label for="titleid">Title</label>
                     <input type="text" id="titleid" name="title" required/>
@@ -93,13 +68,14 @@
                 </div>
                 <div class="form-row">
                     <label for="pagesid">Number of pages</label>
-                    <input type="number" id="pagesid" name="pages" required/>
+                    <input type="number" id="pagesid" name="pages" 
+                    min="1" required/>
                 </div>
                 <div class="form-row">
                     <label for="readstatusid">Read already?</label>
                     <input type="checkbox" id="readstatusid"/>
                 </div>
-                <button>Submit</button>
+                <button id="submit-entry">Submit</button>
             </form>
         </dialog>
     </div>

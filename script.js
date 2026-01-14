@@ -1,6 +1,6 @@
 const myLibrary = [];
 
-function Book(title, author, pages) {
+function Book(title, author, pages, readStatus = false) {
     if (!new.target) {
         throw Error("You must the 'new' operator to call the constructor");
     }
@@ -8,11 +8,11 @@ function Book(title, author, pages) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.readStatus = false;
+    this.readStatus = readStatus;
 }
 
-function addBookToLibrary(title, author, pages) {
-    const newBook = new Book(title, author, pages);
+function addBookToLibrary(title, author, pages, readStatus) {
+    const newBook = new Book(title, author, pages, readStatus);
     myLibrary.push(newBook);
 
     createBookElements(newBook);
@@ -74,14 +74,87 @@ function createBookElements(newBook) {
     shelfDiv.appendChild(bookDiv);
 }
 
-const shelfDiv = document.querySelector("#shelf");
-const newButton = document.querySelector("#add");
-newButton.addEventListener('click', (event) => {
+function checkEntry() {
+    const title = document.querySelector("#titleid").value;
+    const author = document.querySelector("#authorid").value;
+    const pages = document.querySelector("#pagesid").value;
+    const read = document.querySelector("#readstatusid").checked;
+    
+    if (title.length <= 0 
+        || author.length <= 0 
+        || pages.length <= 0) 
+    {
+        return false;
+    }
 
+    addBookToLibrary(title, author, pages, read);
+
+    return true;
+}
+
+function openNewBookDialog() {
+    newBookEntryDiv.classList.remove("hide-entry");
+    newBookEntryDiv.classList.add("show-entry");
+    const dialog = newBookEntryDiv.firstElementChild;
+    dialog.showModal();
+
+    const closeButton = document.querySelector("#close-entry");
+    closeButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        closeNewBookDialog();
+    });
+
+    const submitButton = document.querySelector("#submit-entry");
+    submitButton.addEventListener('click', (event) => {
+        if (checkEntry()) {
+            event.preventDefault();
+            closeNewBookDialog();
+        }
+    });
+}
+
+function closeNewBookDialog() {
+    const bookForm = document.querySelector("#book-form");
+    bookForm.reset();
+
+    const dialog = newBookEntryDiv.firstElementChild;
+    dialog.close();
+    
+    newBookEntryDiv.classList.remove("show-entry");
+    newBookEntryDiv.classList.add("hide-entry");
+}
+
+const shelfDiv = document.querySelector("#shelf");
+const newBookEntryDiv = document.querySelector("#new-book");
+
+const buttons = document.querySelector("button");
+buttons.addEventListener('click', (event) => {
+    let target = event.target;
+
+    switch (target.id) {
+        case "add":
+            openNewBookDialog();
+            break;
+    }
 });
+
+addBookToLibrary(
+    "Harry Potter and the Philosopher's Stone",
+    "J. K. Rowling",
+    223,
+    false
+);
+
+addBookToLibrary(
+    "Percy Jackson and The Lightning Thief",
+    "Rick Riordan",
+    377,
+    true
+);
 
 addBookToLibrary(
     "Heroes of Olympus: The Lost Hero",
     "Rick Riordan",
-    557
+    557,
+    true
 );
