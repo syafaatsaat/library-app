@@ -9,6 +9,10 @@ function Book(title, author, pages, readStatus = false) {
     this.author = author;
     this.pages = pages;
     this.readStatus = readStatus;
+
+    this.toggleRead = function() {
+        this.readStatus = !this.readStatus;
+    }
 }
 
 function addBookToLibrary(title, author, pages, readStatus) {
@@ -18,9 +22,26 @@ function addBookToLibrary(title, author, pages, readStatus) {
     createBookElements(newBook);
 }
 
+function removeBook(id) {
+    let index = -1;
+    for (let i = 0; i < myLibrary.length; ++i) {
+        if (myLibrary[i].id === id) {
+            index = i;
+        }
+    }
+
+    if (index >= 0) {
+        myLibrary.splice(index, 1);
+    }
+
+    const bookDiv = document.querySelector('[data-book-id="' + id + '"]');
+    shelfDiv.removeChild(bookDiv);
+}
+
 function createBookElements(newBook) {
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
+    bookDiv.dataset.bookId = newBook.id;
 
     const bookCoverDiv = document.createElement("div");
     bookCoverDiv.classList.add("book-cover");
@@ -72,6 +93,10 @@ function createBookElements(newBook) {
     bookDiv.appendChild(bookInfoDiv);
 
     shelfDiv.appendChild(bookDiv);
+
+    removeButton.addEventListener('click', () => {
+        removeBook(newBook.id);
+    });
 }
 
 function checkEntry() {
@@ -119,7 +144,7 @@ function closeNewBookDialog() {
 
     const dialog = newBookEntryDiv.firstElementChild;
     dialog.close();
-    
+
     newBookEntryDiv.classList.remove("show-entry");
     newBookEntryDiv.classList.add("hide-entry");
 }
