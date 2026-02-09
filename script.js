@@ -1,185 +1,184 @@
-const myLibrary = [];
+const LibrarySystem = (function() {
+    const libraryArray = [];
 
-class Book {
-    constructor(title, author, pages, readStatus = false) {
-        this.id = crypto.randomUUID();
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.readStatus = readStatus;
-    }
+    class Book {
+        constructor(title, author, pages, readStatus = false) {
+            this.id = crypto.randomUUID();
+            this.title = title;
+            this.author = author;
+            this.pages = pages;
+            this.readStatus = readStatus;
+        }
 
-    toggleRead() {
-        this.readStatus = !this.readStatus;
-    }
-}
-
-function addBookToLibrary(title, author, pages, readStatus) {
-    const newBook = new Book(title, author, pages, readStatus);
-    myLibrary.push(newBook);
-
-    createBookElements(newBook);
-}
-
-function removeBook(id) {
-    let index = -1;
-    for (let i = 0; i < myLibrary.length; ++i) {
-        if (myLibrary[i].id === id) {
-            index = i;
+        toggleRead() {
+            this.readStatus = !this.readStatus;
         }
     }
 
-    if (index >= 0) {
-        myLibrary.splice(index, 1);
-    }
+    const shelfDiv = document.querySelector("#shelf");
+    const newBookEntryDiv = document.querySelector("#new-book");
 
-    const bookDiv = document.querySelector('[data-book-id="' + id + '"]');
-    shelfDiv.removeChild(bookDiv);
-}
+    const addBookToLibrary = (title, author, pages, readStatus) => {
+        const newBook = new Book(title, author, pages, readStatus);
+        libraryArray.push(newBook);
 
-function createBookElements(newBook) {
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
-    bookDiv.dataset.bookId = newBook.id;
+        createBookElements(newBook);
+    };
 
-    const bookCoverDiv = document.createElement("div");
-    bookCoverDiv.classList.add("book-cover");
-    const coverImg = document.createElement("img");
-    coverImg.setAttribute("id", "cover");
-    bookCoverDiv.appendChild(coverImg);
-
-    const bookInfoDiv = document.createElement("div");
-    bookInfoDiv.classList.add("book-info");
-    const titleP = document.createElement("p");
-    titleP.classList.add("title");
-    titleP.textContent = newBook.title;
-    const authorP = document.createElement("p");
-    authorP.classList.add("author");
-    authorP.textContent = newBook.author;
-    const pagesSectionDiv = document.createElement("div");
-    pagesSectionDiv.classList.add("pages-section");
-    const pagesP = document.createElement("p");
-    pagesP.setAttribute("id", "pages");
-    pagesP.textContent = newBook.pages;
-    const pagesWordP = document.createElement("p");
-    pagesWordP.classList.add("pages-word");
-    pagesWordP.textContent = "pages";
-    pagesSectionDiv.appendChild(pagesP);
-    pagesSectionDiv.appendChild(pagesWordP);
-    const buttonsDiv = document.createElement("div");
-    buttonsDiv.classList.add("buttons");
-    const readButton = document.createElement("button");
-    readButton.setAttribute("id", "read-status");
-    if (!newBook.readStatus) {
-        readButton.classList.add("unread");
-        readButton.textContent = "Unread";
-    }
-    else {
-        readButton.classList.add("read");
-        readButton.textContent = "Read";
-    }
-    const removeButton = document.createElement("button");
-    removeButton.classList.add("remove");
-    removeButton.textContent = "Remove";
-    buttonsDiv.appendChild(readButton);
-    buttonsDiv.appendChild(removeButton);
-    bookInfoDiv.appendChild(titleP);
-    bookInfoDiv.appendChild(authorP);
-    bookInfoDiv.appendChild(pagesSectionDiv);
-    bookInfoDiv.appendChild(buttonsDiv);
-
-    bookDiv.appendChild(bookCoverDiv);
-    bookDiv.appendChild(bookInfoDiv);
-
-    shelfDiv.appendChild(bookDiv);
-
-    removeButton.addEventListener('click', () => {
-        removeBook(newBook.id);
-    });
-
-    readButton.addEventListener('click', () => {
-        newBook.toggleRead();
-
-        if (!newBook.readStatus) {
-            if (readButton.classList.contains("read")) {
-                readButton.classList.remove("read");
+    const removeBook = (id) => {
+        let index = -1;
+        for (let i = 0; i < libraryArray.length; ++i) {
+            if (libraryArray[i].id === id) {
+                index = i;
             }
+        }
+
+        if (index >= 0) {
+            libraryArray.splice(index, 1);
+        }
+
+        const bookDiv = document.querySelector('[data-book-id="' + id + '"]');
+        shelfDiv.removeChild(bookDiv);
+    };
+
+    const createBookElements = (newBook) => {
+        const bookDiv = document.createElement("div");
+        bookDiv.classList.add("book");
+        bookDiv.dataset.bookId = newBook.id;
+
+        const bookCoverDiv = document.createElement("div");
+        bookCoverDiv.classList.add("book-cover");
+        const coverImg = document.createElement("img");
+        coverImg.setAttribute("id", "cover");
+        bookCoverDiv.appendChild(coverImg);
+
+        const bookInfoDiv = document.createElement("div");
+        bookInfoDiv.classList.add("book-info");
+        const titleP = document.createElement("p");
+        titleP.classList.add("title");
+        titleP.textContent = newBook.title;
+        const authorP = document.createElement("p");
+        authorP.classList.add("author");
+        authorP.textContent = newBook.author;
+        const pagesSectionDiv = document.createElement("div");
+        pagesSectionDiv.classList.add("pages-section");
+        const pagesP = document.createElement("p");
+        pagesP.setAttribute("id", "pages");
+        pagesP.textContent = newBook.pages;
+        const pagesWordP = document.createElement("p");
+        pagesWordP.classList.add("pages-word");
+        pagesWordP.textContent = "pages";
+        pagesSectionDiv.appendChild(pagesP);
+        pagesSectionDiv.appendChild(pagesWordP);
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.classList.add("buttons");
+        const readButton = document.createElement("button");
+        readButton.setAttribute("id", "read-status");
+        if (!newBook.readStatus) {
             readButton.classList.add("unread");
             readButton.textContent = "Unread";
         }
         else {
-            if (readButton.classList.contains("unread")) {
-                readButton.classList.remove("unread");
-            }
             readButton.classList.add("read");
             readButton.textContent = "Read";
         }
-    })
-}
+        const removeButton = document.createElement("button");
+        removeButton.classList.add("remove");
+        removeButton.textContent = "Remove";
+        buttonsDiv.appendChild(readButton);
+        buttonsDiv.appendChild(removeButton);
+        bookInfoDiv.appendChild(titleP);
+        bookInfoDiv.appendChild(authorP);
+        bookInfoDiv.appendChild(pagesSectionDiv);
+        bookInfoDiv.appendChild(buttonsDiv);
 
-function checkEntry() {
-    const title = document.querySelector("#titleid").value;
-    const author = document.querySelector("#authorid").value;
-    const pages = document.querySelector("#pagesid").value;
-    const read = document.querySelector("#readstatusid").checked;
-    
-    if (title.length <= 0 
-        || author.length <= 0 
-        || pages.length <= 0) 
-    {
-        return false;
-    }
+        bookDiv.appendChild(bookCoverDiv);
+        bookDiv.appendChild(bookInfoDiv);
 
-    addBookToLibrary(title, author, pages, read);
+        shelfDiv.appendChild(bookDiv);
 
-    return true;
-}
+        removeButton.addEventListener('click', () => {
+            removeBook(newBook.id);
+        });
 
-function openNewBookDialog() {
-    newBookEntryDiv.classList.remove("hide-entry");
-    newBookEntryDiv.classList.add("show-entry");
-    const dialog = newBookEntryDiv.firstElementChild;
-    dialog.showModal();
+        readButton.addEventListener('click', () => {
+            newBook.toggleRead();
 
-    const closeButton = document.querySelector("#close-entry");
-    closeButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        closeNewBookDialog();
-    });
+            if (!newBook.readStatus) {
+                if (readButton.classList.contains("read")) {
+                    readButton.classList.remove("read");
+                }
+                readButton.classList.add("unread");
+                readButton.textContent = "Unread";
+            }
+            else {
+                if (readButton.classList.contains("unread")) {
+                    readButton.classList.remove("unread");
+                }
+                readButton.classList.add("read");
+                readButton.textContent = "Read";
+            }
+        })
+    };
 
-    const submitButton = document.querySelector("#submit-entry");
-    submitButton.addEventListener('click', (event) => {
-        if (checkEntry()) {
+    const checkEntry = () => {
+        const title = document.querySelector("#titleid").value;
+        const author = document.querySelector("#authorid").value;
+        const pages = document.querySelector("#pagesid").value;
+        const read = document.querySelector("#readstatusid").checked;
+        
+        if (title.length <= 0 
+            || author.length <= 0 
+            || pages.length <= 0) 
+        {
+            return false;
+        }
+
+        addBookToLibrary(title, author, pages, read);
+
+        return true;
+    };
+
+    const openNewBookDialog = () => {
+        newBookEntryDiv.classList.remove("hide-entry");
+        newBookEntryDiv.classList.add("show-entry");
+        const dialog = newBookEntryDiv.firstElementChild;
+        dialog.showModal();
+
+        const closeButton = document.querySelector("#close-entry");
+        closeButton.addEventListener('click', (event) => {
             event.preventDefault();
             closeNewBookDialog();
-        }
-    });
-}
+        });
 
-function closeNewBookDialog() {
-    const bookForm = document.querySelector("#book-form");
-    bookForm.reset();
+        const submitButton = document.querySelector("#submit-entry");
+        submitButton.addEventListener('click', (event) => {
+            if (checkEntry()) {
+                event.preventDefault();
+                closeNewBookDialog();
+            }
+        });
+    };
 
-    const dialog = newBookEntryDiv.firstElementChild;
-    dialog.close();
+    const closeNewBookDialog = () => {
+        const bookForm = document.querySelector("#book-form");
+        bookForm.reset();
 
-    newBookEntryDiv.classList.remove("show-entry");
-    newBookEntryDiv.classList.add("hide-entry");
-}
+        const dialog = newBookEntryDiv.firstElementChild;
+        dialog.close();
 
-const shelfDiv = document.querySelector("#shelf");
-const newBookEntryDiv = document.querySelector("#new-book");
+        newBookEntryDiv.classList.remove("show-entry");
+        newBookEntryDiv.classList.add("hide-entry");
+    };
 
-const buttons = document.querySelector("button");
-buttons.addEventListener('click', (event) => {
-    let target = event.target;
-
-    switch (target.id) {
-        case "add":
+    const setupNewBookButtonListener = () => {
+        document.getElementById("add").addEventListener('click', () => {
             openNewBookDialog();
-            break;
-    }
-});
+        });
+    };
+
+    setupNewBookButtonListener();
+})();
 
 // addBookToLibrary(
 //     "Harry Potter and the Philosopher's Stone",
